@@ -1,1 +1,1 @@
-# sequelize-repo
+# This is my project
