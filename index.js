@@ -1,13 +1,17 @@
-const express = require("express")
-const app = express()
+const express = require("express");
+const sequelize = require('./database');
+const User = require('./User');
 
-app.listen(3004, () => {
-    console.log("server is listening to port 3000")
-})
+sequelize.sync().then(() => console.log("db is ready"));
 
-app.get('/user', (req, res) => {
-    res.send({
-        "name": "suresh",
-        "id": "120526"
+const app = express();
+
+app.post('/users', (req, res) => {
+    User.create(req.body).then(() => {
+        res.send("user is inserted")
     })
 })
+
+app.listen(3004, () => {
+    console.log("server is listening to port 3005")
+});
